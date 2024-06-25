@@ -6,6 +6,8 @@ Escrever um programa formado por um processo (thread) produtor e por um processo
 #include <pthread.h>
 #include <stdio.h>
 
+#define N_REPETICOES 132
+
 pthread_t tid1, tid2;
 
 sem_t s0, s1;
@@ -15,7 +17,7 @@ int buffer[132];
 void *produtor()
 {
     sem_wait(&s0);
-    for (int i = 0; i < 132; i++)
+    for (int i = 0; i < N_REPETICOES; i++)
     {
         buffer[i] = i;
         // printf("\tValor produzido: %d\n", i);
@@ -26,7 +28,7 @@ void *consumidor()
 {
     int k;
     sem_wait(&s1);
-    for (int i = 0; i < 132; i++)
+    for (int i = 0; i < N_REPETICOES; i++)
     {
         k = buffer[i];
         printf("Valor consumido: %d\n", k);

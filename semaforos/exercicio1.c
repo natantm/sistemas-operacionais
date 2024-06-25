@@ -6,6 +6,8 @@ Escreva um programa concorrente formado por dois processos, um produtor e um con
 #include <pthread.h>
 #include <stdio.h>
 
+#define N_REPETICOES 10
+
 pthread_t tid1, tid2;
 
 sem_t s0, s1;
@@ -14,7 +16,7 @@ int buffer;
 
 void *produtor()
 {
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < N_REPETICOES; i++)
     {
         sem_wait(&s0);
         buffer = i;
@@ -25,7 +27,7 @@ void *produtor()
 void *consumidor()
 {
     int k;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < N_REPETICOES; i++)
     {
         sem_wait(&s1);
         k = buffer;

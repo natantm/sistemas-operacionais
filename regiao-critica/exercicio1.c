@@ -1,9 +1,13 @@
 /*
 Escolha três dos exercícios anteriores e implemente usando as construções: pthread_mutex_lock, pthread_mutex_unlock e as variáveis condição pthread_cond_wait e pthread_cond_signal
+Exercício escolhido:
+Escreva um programa concorrente formado por dois processos, um produtor e um consumidor que compartilham um buffer de um elemento, e que sincronizam suas ações com o uso de semáforos.
 */
 
 #include <pthread.h>
 #include <stdio.h>
+
+#define N_REPETICOES 100
 
 pthread_t tid1, tid2;
 pthread_mutex_t lock;
@@ -14,7 +18,7 @@ int data_available = 0; // Indica se há um novo dado no buffer
 
 void *produtor()
 {
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < N_REPETICOES; i++)
     {
         pthread_mutex_lock(&lock);
         while (data_available)
@@ -38,7 +42,7 @@ void *produtor()
 void *consumidor()
 {
     int k;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < N_REPETICOES; i++)
     {
         pthread_mutex_lock(&lock);
         while (!data_available)

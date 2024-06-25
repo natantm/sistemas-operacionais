@@ -1,6 +1,10 @@
 /*
+Escolha três dos exercícios anteriores e implemente usando as construções: pthread_mutex_lock, pthread_mutex_unlock e as variáveis condição pthread_cond_wait e pthread_cond_signal
 Escrever um programa formado por três processos (threads), p0, p1, p2, que executam um loop eterno no qual imprime a sua identificação, na seqüência: p1, p2, p0, p1, p2, p0,...
 */
+
+// Não vou fazer um loop eterno
+
 #include <pthread.h>
 #include <stdio.h>
 

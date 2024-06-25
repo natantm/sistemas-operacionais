@@ -2,9 +2,13 @@
 Escreva um programa formado por três threads, th0, th1 e th2 que executam um loop infinito, e que utilizam semáforos para sincronização . A thread th0 faz a leitura de um valor, realiza um cálculo parcial e deposita esse cálculo em um buffer, de onde a thread th1 o retira, executa um outro cálculo e deposita o resultado em um segundo buffer de onde a thread th2o retira e imprime.
 */
 
+// Não vou fazer um loop infinito
+
 #include <semaphore.h>
 #include <pthread.h>
 #include <stdio.h>
+
+#define N_REPETICOES 10
 
 pthread_t tid1, tid2, tid3;
 
@@ -15,7 +19,7 @@ int buffer1, buffer2;
 void *p0()
 {
     int val;
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < N_REPETICOES; i++)
     {
         sem_wait(&s0);
 
@@ -29,7 +33,7 @@ void *p0()
 
 void *p1()
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < N_REPETICOES; i++)
     {
         sem_wait(&s1);
         buffer2 = buffer1 + 5;
@@ -39,7 +43,7 @@ void *p1()
 
 void *p2()
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < N_REPETICOES; i++)
     {
         sem_wait(&s2);
         printf("p2 = %d\n", buffer2);

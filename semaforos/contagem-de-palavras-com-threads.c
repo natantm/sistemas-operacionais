@@ -1,14 +1,20 @@
-/*
-Objetivo: Dividir o trabalho entre múltiplas threads para processar dados.
-Descrição: Crie um programa que conte o número de palavras em um grande
-texto. Divida o texto em partes e crie uma thread para contar as palavras em cada parte. Combine os resultados das threads para obter a contagem total de palavras.
-*/
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
 // Definindo o tamanho máximo do buffer (modifique conforme necessário)
 #define MAX_BUFFER_SIZE 1024
+
+// Estrutura para passar argumentos para as threads
+typedef struct
+{
+    char *text;
+    int start;
+    int end;
+    int wordCount;
+} ThreadArgs;
 
 // Variável global para armazenar o conteúdo do arquivo
 char fileContent[MAX_BUFFER_SIZE];
@@ -31,21 +37,73 @@ void readFile(const char *fileName)
         exit(EXIT_FAILURE);
     }
 
-    fileContent[bytesRead] = '\0'; // Certifique-se de que a string é terminada com NULL
+    fileContent[bytesRead] = '\0'; // Para garantir que a string é terminada com NULL
     fclose(file);
 }
 
-pthread_t tid1, tid2;
+// Função para contar palavras em uma parte do texto
+void *countWords(void *args)
+{
+    ThreadArgs *threadArgs = (ThreadArgs *)args;
+    char *text = threadArgs->text;
+    int start = threadArgs->start;
+    int end = threadArgs->end;
+    int inWord = 0;
+    threadArgs->wordCount = 0;
 
-void ler_
+    for (int i = start; i < end; i++)
+    {
+        if (isspace(text[i]))
+        {
+            if (inWord)
+            {
+                inWord = 0;
+                threadArgs->wordCount++;
+            }
+        }
+        else
+        {
+            inWord = 1;
+        }
+    }
+    if (inWord)
+    {
+        threadArgs->wordCount++;
+    }
 
-    int
-    main()
+    return NULL;
+}
+
+int main()
 {
     readFile("arquivo.txt");
 
-    pthread_create(&tid1, NULL, produtor, NULL);
-    pthread_create(&tid2, NULL, consumidor, NULL);
+    int numThreads = 4;
+    pthread_t threads[numThreads];
+    ThreadArgs threadArgs[numThreads];
+
+    int len = strlen(fileContent);
+    int partSize = len / numThreads;
+
+    // Criar e iniciar threads
+    for (int i = 0; i < numThreads; i++)
+    {
+        threadArgs[i].text = fileContent;
+        threadArgs[i].start = i * partSize;
+        threadArgs[i].end = (i == numThreads - 1) ? len : (i + 1) * partSize;
+        threadArgs[i].wordCount = 0;
+        pthread_create(&threads[i], NULL, countWords, &threadArgs[i]);
+    }
+
+    // Aguardar o término das threads
+    int totalWords = 0;
+    for (int i = 0; i < numThreads; i++)
+    {
+        pthread_join(threads[i], NULL);
+        totalWords += threadArgs[i].wordCount;
+    }
+
+    printf("Total de palavras: %d\n", totalWords);
 
     return 0;
 }

@@ -1,7 +1,5 @@
 /*
-Escreva um programa concorrente formado por dois processos, um produtor
-e um consumidor que compartilham um buffer de um elemento, e que
-sincronizam suas ações com o uso de semáforos.
+Escreva um programa concorrente formado por dois processos, um produtor e um consumidor que compartilham um buffer de um elemento, e que sincronizam suas ações com o uso de semáforos.
 */
 
 #include <semaphore.h>

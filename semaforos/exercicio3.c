@@ -1,8 +1,5 @@
 /*
-Escrever um programa formado por um processo (thread) produtor e por um
-processo (thread) consumidor, que compartilham um buffer de 132 posições. O
-processo consumidor somente pode consumir (fazer printf) quando o buffer
-estiver cheio
+Escrever um programa formado por um processo (thread) produtor e por um processo (thread) consumidor, que compartilham um buffer de 132 posições. O processo consumidor somente pode consumir (fazer printf) quando o buffer estiver cheio
 */
 
 #include <semaphore.h>

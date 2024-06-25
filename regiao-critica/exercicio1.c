@@ -1,8 +1,5 @@
 /*
-Escolha três dos exercícios anteriores e implemente usando as construções
-pthread_mutex_lock, pthread_mutex_unlock e as variáveis condição
-pthread_cond_wait e pthread_cond_signal
-exercicio 0
+Escolha três dos exercícios anteriores e implemente usando as construções: pthread_mutex_lock, pthread_mutex_unlock e as variáveis condição pthread_cond_wait e pthread_cond_signal
 */
 
 #include <pthread.h>

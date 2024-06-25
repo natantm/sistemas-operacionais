@@ -1,7 +1,5 @@
 /*
-Escrever um programa formado por três processos (threads), p0, p1, p2, que
-executam um loop eterno no qual imprime a sua identificação, na seqüência
-p1, p2, p0, p1, p2, p0,...
+Escrever um programa formado por três processos (threads), p0, p1, p2, que executam um loop eterno no qual imprime a sua identificação, na seqüência p1, p2, p0, p1, p2, p0,...
 */
 
 #include <semaphore.h>

@@ -1,12 +1,5 @@
 /*
-Escreva um programa formado por quatro threads: monitor, relator1,
-relator2 e impressor. A thread monitor faz a leitura de 100 valores inteiros. Os
-valores menores que 500 devem ser armazenados no vetor vet0 e os maiores
-que 500 no vetor vet1. O processo relator0 deve somar os elementos do vetor
-vet0 e o processo relator1 deve somar os elementos do vetor vet1. O processo
-impressor deve imprimir cada soma (somente quando o vetor estiver cheio), juntamente com a identificação do
-processo relator que a efetuou. Considere que as somas possuem um valor
-superior a 0.
+Escreva um programa formado por quatro threads: monitor, relator1 relator2 e impressor. A thread monitor faz a leitura de 100 valores inteiros. Os valores menores que 500 devem ser armazenados no vetor vet0 e os maiores que 500 no vetor vet1. O processo relator0 deve somar os elementos do vetor vet0 e o processo relator1 deve somar os elementos do vetor vet1. O processo impressor deve imprimir cada soma (somente quando o vetor estiver cheio), juntamente com a identificação do processo relator que a efetuou. Considere que as somas possuem um valor superior a 0.
 */
 
 #include <semaphore.h>

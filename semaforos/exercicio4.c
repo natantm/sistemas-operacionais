@@ -1,9 +1,5 @@
 /*
-Escreva um programa formado por três threads, th0, th1 e th2 que executam
-um loop infinito, e que utilizam semáforos para sincronização . A thread th0 faz
-a leitura de um valor, realiza um cálculo parcial e deposita esse cálculo em um
-buffer, de onde a thread th1 o retira, executa um outro cálculo e deposita o
-resultado em um segundo buffer de onde a thread th2o retira e imprime.
+Escreva um programa formado por três threads, th0, th1 e th2 que executam um loop infinito, e que utilizam semáforos para sincronização . A thread th0 faz a leitura de um valor, realiza um cálculo parcial e deposita esse cálculo em um buffer, de onde a thread th1 o retira, executa um outro cálculo e deposita o resultado em um segundo buffer de onde a thread th2o retira e imprime.
 */
 
 #include <semaphore.h>

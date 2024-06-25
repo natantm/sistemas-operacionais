@@ -1,8 +1,6 @@
 /*
-Objetivo: Sincronizar múltiplas threads em um ponto específico. 
-Descrição: Crie um programa com três threads que devem esperar umas pelas 
-outras em um ponto de barreira antes de continuar a execução. Cada thread 
-deve imprimir uma mensagem antes e depois da barreira. 
+Objetivo: Sincronizar múltiplas threads em um ponto específico.
+Descrição: Crie um programa com três threads que devem esperar umas pelas outras em um ponto de barreira antes de continuar a execução. Cada thread  deve imprimir uma mensagem antes e depois da barreira.
 */
 #include <pthread.h>
 #include <stdio.h>
@@ -10,25 +8,30 @@ deve imprimir uma mensagem antes e depois da barreira.
 
 pthread_mutex_t lock;
 pthread_cond_t cond;
-pthread_t tid1,tid2,tid3;
+pthread_t tid1, tid2, tid3;
 int count = 0;
 
-void barreira() {
+void barreira()
+{
     pthread_mutex_lock(&lock);
 
     count++;
-    if (count < 3) {
+    if (count < 3)
+    {
         pthread_cond_wait(&cond, &lock);
-    } else {
-        count = 0; 
+    }
+    else
+    {
+        count = 0;
         pthread_cond_broadcast(&cond);
     }
 
     pthread_mutex_unlock(&lock);
 }
 
-void* thread_function(void* arg) {
-    int thread_id = *(int*)arg;
+void *thread_function(void *arg)
+{
+    int thread_id = *(int *)arg;
     printf("Thread %d chegou na barreira\n", thread_id);
 
     barreira();
@@ -38,7 +41,8 @@ void* thread_function(void* arg) {
     return NULL;
 }
 
-int main() {
+int main()
+{
     int thread_ids[3] = {1, 2, 3};
     pthread_mutex_init(&lock, NULL);
     pthread_cond_init(&cond, NULL);
